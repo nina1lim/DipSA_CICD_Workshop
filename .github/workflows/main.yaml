@@ -10,52 +10,52 @@ jobs:
   Push_To_Docker:
     runs-on: ubuntu-latest
   
-  steps:
+    steps:
 
     # https://github.com/marketplace/actions/checkout
-    - name: Checkout
-      uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
     
-    - name: Set up QEMU
-      uses: docker/setup-qemu-action@v2
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
 
     # https://github.com/marketplace/actions/docker-setup-buildx
-    - name: Set up Docker Build
-      uses: docker/setup-buildx-action@v2
+      - name: Set up Docker Build
+        uses: docker/setup-buildx-action@v2
     
     # https://github.com/marketplace/actions/docker-login
-    - name: Login to DockerHub
-      uses: docker/login-action@v2
-      with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
     # https://github.com/marketplace/actions/build-and-push-docker-images
-    - name: Build and push
-      uses: docker/build-push-action@v3
-      with:
-        context: .
-        push: true
-        tags: nina1lim/dipsa_cicd_workshop:ref
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true
+          tags: nina1lim/dipsa_cicd_workshop:ref
 
     # https://github.com/marketplace/actions/slack-send
-    - name: Send a Message 
-      id: slack
-      uses: slackapi/slack-github-action@v1.18.0
-      with:
-        payload: |
-          {
-            "blocks": [
-              {
-                "type": "section",
-                "text": {
-                  "type": "mrkdwn",
-                  "text": "Name: ${{ secrets.SLACK_NAME }} \n Matriculation: ${{ secrets.SLACK_MATRIC }} \n Email: ${{ secrets.SLACK_EMAIL }} \n Repo: ${{ github.repositoryUrl }} \n Image Name: ${{ secrets.DOCKERHUB_USERNAME }}/https://hub.docker.com/repository/docker/nina1lim/dipsa_cicd_workshop:${{ github.ref_name }}  \n Image url: https://hub.docker.com/repository/docker/nina1lim/dipsa_cicd_workshop"
+      - name: Send a Message 
+        id: slack
+        uses: slackapi/slack-github-action@v1.18.0
+        with:
+          payload: |
+            {
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "Name: ${{ secrets.SLACK_NAME }} \n Matriculation: ${{ secrets.SLACK_MATRIC }} \n Email: ${{ secrets.SLACK_EMAIL }} \n Repo: ${{ github.repositoryUrl }} \n Image Name: ${{ secrets.DOCKERHUB_USERNAME }}/https://hub.docker.com/repository/docker/nina1lim/dipsa_cicd_workshop:${{ github.ref_name }}  \n Image url: https://hub.docker.com/repository/docker/nina1lim/dipsa_cicd_workshop"
+                  }
                 }
-              }
-            ]
-          }
-      env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
     

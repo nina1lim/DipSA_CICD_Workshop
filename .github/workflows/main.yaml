@@ -32,11 +32,11 @@ jobs:
 
     # https://github.com/marketplace/actions/build-and-push-docker-images
     - name: Build and push
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          push: true
-          tags: nina1lim/dipsa_cicd_workshop:ref
+      uses: docker/build-push-action@v3
+      with:
+        context: .
+        push: true
+        tags: nina1lim/dipsa_cicd_workshop:ref
 
     # https://github.com/marketplace/actions/slack-send
     - name: Send a Message 

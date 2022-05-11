@@ -5,7 +5,7 @@ on:
     types: [published]
     tag:
     - v1.*
-    - forsubmission
+    - submission
 
 jobs:
   Push_To_Docker:
@@ -37,7 +37,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: nina1lim/dipsa_cicd_workshop:forsubmission
+          tags: nina1lim/dipsa_cicd_workshop:submission
 
     # https://github.com/marketplace/actions/slack-send
       - name: Send a Message 

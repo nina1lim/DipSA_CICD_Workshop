@@ -36,7 +36,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: nina1lim/dipsa_cicd_workshop:v1.2
+          tags: nina1lim/dipsa_cicd_workshop:v1.3
 
     # https://github.com/marketplace/actions/slack-send
       - name: Send a Message 
@@ -50,7 +50,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "Name: ${{ secrets.SLACK_NAME }} \n Matriculation: ${{ secrets.SLACK_MATRIC }} \n Email: ${{ secrets.SLACK_EMAIL }} \n Repo: ${{ github.repositoryUrl }} \n Image Name: ${{ secrets.DOCKERHUB_USERNAME }}/dipsa_cicd_workshop:${{ github.ref_name }}  \n Image url: https://hub.docker.com/repository/docker/nina1lim/dipsa_cicd_workshop"
+                    "text": "Name: ${{ secrets.SLACK_NAME }} \n Matriculation: ${{ secrets.SLACK_MATRIC }} \n Email: ${{ secrets.SLACK_EMAIL }} \n Repo: ${{ github.repositoryUrl }} \n Image Name: nina1lim/dipsa_cicd_workshop:${{ github.ref_name }}  \n Image url: https://hub.docker.com/repository/docker/nina1lim/dipsa_cicd_workshop"
                   }
                 }
               ]
